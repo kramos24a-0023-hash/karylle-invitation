@@ -1,7 +1,8 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import { cookies } from "next/headers";
+import PasswordGate from "./password-gate";
+import SurpriseNote from "./surprise-note";
+import { hasValidAccessToken } from "../lib/access-token";
 import { Great_Vibes, Inter, Playfair_Display } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -41,8 +42,13 @@ const songs = [
   { title: "Heaven Knows", artist: "Orange & Lemons", reason: "A mellow song with a sincere, heartfelt sound.", id: "0Qra8Ps4tJAZPqRXyehCjc" },
 ];
 
-export default function Home() {
-  const [noteIndex, setNoteIndex] = useState<number | null>(null);
+export default async function Home() {
+  const cookieStore = await cookies();
+  const isUnlocked = await hasValidAccessToken(cookieStore.get("charmaine_access")?.value);
+
+  if (!isUnlocked) {
+    return <PasswordGate />;
+  }
 
   return (
     <main className={`${inter.className} min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-rose-100 text-rose-950`}>
@@ -78,23 +84,7 @@ export default function Home() {
         </article>
       </section>
 
-      <section className="px-5 py-12 sm:px-8">
-        <div className="mx-auto max-w-4xl rounded-[2rem] bg-rose-900 p-7 text-white shadow-xl sm:p-10">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-rose-200 sm:text-sm">A little surprise</p>
-          <h2 className={`${playfair.className} mt-3 text-3xl font-bold sm:text-4xl`}>A note, whenever you need one.</h2>
-          <p className="mt-3 max-w-2xl leading-7 text-rose-100">Tap below to uncover a small reminder. There are a few, so you can come back for another.</p>
-          <button
-            type="button"
-            onClick={() => setNoteIndex((current) => current === null ? 0 : (current + 1) % notes.length)}
-            aria-expanded={noteIndex !== null}
-            aria-controls="surprise-note"
-            className="mt-6 rounded-full bg-white px-6 py-3 font-bold text-rose-900 transition hover:-translate-y-0.5 hover:bg-rose-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-          >
-            {noteIndex === null ? "Open a little note" : "Reveal another note"}
-          </button>
-          {noteIndex !== null && <p id="surprise-note" aria-live="polite" className="mt-6 rounded-2xl border border-white/20 bg-white/10 p-5 text-lg leading-8 text-white">{notes[noteIndex]}</p>}
-        </div>
-      </section>
+      <SurpriseNote />
 
       <section className="px-5 py-10 sm:px-8">
         <div className="mx-auto max-w-4xl rounded-[2rem] border border-rose-100 bg-white p-7 shadow-lg sm:p-10">
