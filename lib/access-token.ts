@@ -3,7 +3,7 @@ const TOKEN_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 function encodeBase64Url(bytes: Uint8Array) {
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/=/g, "").replace(/\\+/g, "-").replace(/\\//g, "_");
+  return btoa(binary).replace(/=/g, "").replaceAll("+", "-").replaceAll("/", "_");
 }
 
 function decodeBase64Url(value: string) {
@@ -43,7 +43,7 @@ export async function createAccessToken() {
 export async function hasValidAccessToken(token?: string) {
   if (!token) return false;
   const [issuedAt, providedSignature, extra] = token.split(".");
-  if (!issuedAt || !providedSignature || extra !== undefined || !/^\\d+$/.test(issuedAt)) return false;
+  if (!issuedAt || !providedSignature || extra !== undefined || !Array.from(issuedAt).every((char) => char >= "0" && char <= "9")) return false;
 
   const issuedAtSeconds = Number(issuedAt);
   const now = Math.floor(Date.now() / 1000);
