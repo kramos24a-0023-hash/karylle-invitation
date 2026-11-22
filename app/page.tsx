@@ -9,11 +9,6 @@ const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700", "800"] });
 const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
 
-const notes = [
-  "I hope you know how much your thoughtfulness matters. The way you listen and notice people says a lot about you.",
-  "Your curiosity and the way you see the world are things I would like to know more about, at your pace.",
-  "A small reminder: you deserve to be appreciated for all the things that make you who you are.",
-];
 
 const qualities = [
   ["C", "Considerate", "You make room for other people’s feelings and perspectives."],
