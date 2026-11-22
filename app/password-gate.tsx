@@ -42,6 +42,7 @@ export default function PasswordGate() {
         <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-rose-600">A private letter</p>
         <h1 className={`${playfair.className} mt-3 text-3xl font-bold text-rose-950 sm:text-4xl`}>For Charmaine</h1>
         <p className="mt-3 leading-7 text-rose-800">Enter the password to open the page.</p>
+        <p className="mt-2 text-xs text-rose-600">hint: kurt’s dog’s name</p>
         <form onSubmit={unlock} className="mt-7 text-left">
           <label htmlFor="page-password" className="text-sm font-semibold text-rose-950">Password</label>
           <input
