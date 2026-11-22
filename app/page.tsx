@@ -46,43 +46,15 @@ export default function Home() {
   ];
 
   const nameCompliments = [
-    {
-      letter: "K",
-      word: "Kind",
-      meaning: "Because your heart shows in the way you treat people.",
-    },
-    {
-      letter: "A",
-      word: "Admirable",
-      meaning:
-        "Because there is something about you that is truly worth respecting.",
-    },
-    {
-      letter: "R",
-      word: "Radiant",
-      meaning:
-        "Because your presence can make even simple moments feel brighter.",
-    },
-    {
-      letter: "Y",
-      word: "Youthful",
-      meaning: "Because your energy feels soft, bright, and full of life.",
-    },
-    {
-      letter: "L",
-      word: "Lovely",
-      meaning: "Because your beauty is not only seen, it is also felt.",
-    },
-    {
-      letter: "L",
-      word: "Light",
-      meaning: "Because you bring warmth and peace without even trying.",
-    },
-    {
-      letter: "E",
-      word: "Effortless",
-      meaning: "Because being special seems so natural to you.",
-    },
+    { letter: "C", word: "Caring", meaning: "You notice how others feel, and your kindness makes people feel seen." },
+    { letter: "H", word: "Hopeful", meaning: "You bring a bright outlook that makes hard days seem gentler." },
+    { letter: "A", word: "Authentic", meaning: "You are genuine and comfortable being yourself." },
+    { letter: "R", word: "Resilient", meaning: "You keep finding strength and grace through life's challenges." },
+    { letter: "M", word: "Mindful", meaning: "You listen closely and remember the small things that matter." },
+    { letter: "A", word: "Admirable", meaning: "Your sincerity and good heart make you easy to respect." },
+    { letter: "I", word: "Inspiring", meaning: "The way you live encourages others to grow and do good." },
+    { letter: "N", word: "Nurturing", meaning: "You make people feel cared for, safe, and understood." },
+    { letter: "E", word: "Elegant", meaning: "Your grace shows in your words, choices, and quiet confidence." },
   ];
 
   const photos = [
@@ -169,7 +141,7 @@ export default function Home() {
           <h1
             className={`${greatVibes.className} mx-auto mb-8 max-w-2xl text-6xl leading-tight text-rose-900 md:text-8xl`}
           >
-            Click here to view invitation
+            A little invitation for Charmaine
           </h1>
 
           <button
@@ -208,7 +180,7 @@ export default function Home() {
               <h1
                 className={`${greatVibes.className} mt-4 text-6xl leading-tight text-white md:text-8xl`}
               >
-                To the Prettiest Girl
+                For Charmaine
               </h1>
 
               <p className="mt-5 text-base leading-7 text-rose-100">
@@ -249,7 +221,7 @@ export default function Home() {
               <h2
                 className={`${playfair.className} text-5xl font-extrabold tracking-[0.25em] text-rose-900 md:text-7xl`}
               >
-                KARYLLE
+                CHARMAINE
               </h2>
 
               <div className="mt-6 grid gap-3">
@@ -321,11 +293,11 @@ export default function Home() {
                 <p
                   className={`${greatVibes.className} text-4xl leading-tight md:text-5xl`}
                 >
-                  “Thou art all fair, my love; there is no spot in thee.”
+                  “Love is patient and kind.”
                 </p>
 
                 <p className="mt-4 text-sm font-semibold text-rose-200">
-                  Song of Solomon 4:7
+                  1 Corinthians 13:4
                 </p>
               </div>
             </div>
@@ -408,7 +380,7 @@ export default function Home() {
                 >
                   <Image
                     src={photo.src}
-                    alt={`Karylle photo ${index + 1}`}
+                    alt={`Charmaine photo ${index + 1}`}
                     width={700}
                     height={900}
                     className="h-[420px] w-full rounded-[1.5rem] object-cover"
