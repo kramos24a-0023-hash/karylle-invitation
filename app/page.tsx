@@ -4,508 +4,146 @@ import { useState } from "react";
 import Image from "next/image";
 import { Great_Vibes, Inter, Playfair_Display } from "next/font/google";
 
-const inter = Inter({
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700", "800"] });
+const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-});
+const notes = [
+  "I hope you know how much your thoughtfulness matters. The way you listen and notice people says a lot about you.",
+  "Your curiosity and the way you see the world are things I would like to know more about, at your pace.",
+  "A small reminder: you deserve to be appreciated for all the things that make you who you are.",
+];
 
-const greatVibes = Great_Vibes({
-  subsets: ["latin"],
-  weight: "400",
-});
+const qualities = [
+  ["C", "Considerate", "You make room for other people’s feelings and perspectives."],
+  ["H", "Hopeful", "You carry an outlook that helps others see possibility."],
+  ["A", "Authentic", "You seem most yourself, and that honesty is refreshing."],
+  ["R", "Resilient", "You keep moving through hard things with quiet strength."],
+  ["M", "Mindful", "You give attention to the details and people around you."],
+  ["A", "Admirable", "Your values show in the choices you make."],
+  ["I", "Inquisitive", "Your questions and ideas make conversations meaningful."],
+  ["N", "Nurturing", "You have a thoughtful way of making people feel welcome."],
+  ["E", "Empathetic", "You try to understand what others are experiencing."],
+];
 
-type Song = {
-  title: string;
-  artist: string;
-  reason: string;
-  spotifyLink: string;
-  embedLink: string;
-};
+const photos = [
+  { src: "/photos/k4.jpg", caption: "A little moment worth remembering." },
+  { src: "/photos/k2.jpg", caption: "A day by the water." },
+  { src: "/photos/k1.jpg", caption: "One of those lovely snapshots." },
+];
+
+const songs = [
+  { title: "The Most Beautiful Thing", artist: "Bruno Major", reason: "A gentle song for a thoughtful kind of admiration.", id: "07koEqsKHZTlGVMC9eoEjO" },
+  { title: "Nothing", artist: "Bruno Major", reason: "For the comfort of simple, unhurried moments.", id: "1lORkxEMmsCZqhoxcmk3A3" },
+  { title: "Best Part", artist: "Daniel Caesar ft. H.E.R.", reason: "A warm reminder to appreciate the good in someone.", id: "1RMJOxR6GRPsBHL8qeC2ux" },
+  { title: "Those Eyes", artist: "New West", reason: "For the little details that stay with you.", id: "50x1Ic8CaXkYNvjmxe3WXy" },
+  { title: "Until I Found You", artist: "Stephen Sanchez", reason: "A soft, sweet, old-school romantic feeling.", id: "0T5iIrXA4p5GsubkhuBIKV" },
+  { title: "Heaven Knows", artist: "Orange & Lemons", reason: "A mellow song with a sincere, heartfelt sound.", id: "0Qra8Ps4tJAZPqRXyehCjc" },
+];
 
 export default function Home() {
-  const [showInvitation, setShowInvitation] = useState(false);
-
-  const thingsILike = [
-    "Your smile has this quiet way of making everything feel lighter, even on ordinary days.",
-    "Your laugh stays in my mind because it feels honest, warm, and naturally beautiful.",
-    "I like the way you carry yourself with grace, even when you are not trying to impress anyone.",
-    "Your kindness shows in the little things, the simple things, and the things most people overlook.",
-    "There is a calmness in your presence that makes the world feel softer whenever you are around.",
-  ];
-
-  const thingsIAdmire = [
-    "your heart, because you have a way of treating people with care and sincerity.",
-    "your strength, especially when life becomes heavy and you still continue with grace.",
-    "your patience, because your gentleness says a lot about the kind of person you are.",
-    "your beauty, not only in the way you look, but in the way you speak, care, and exist.",
-    "the way you inspire me to become better, softer, more genuine, and closer to God.",
-  ];
-
-  const nameCompliments = [
-    { letter: "C", word: "Caring", meaning: "You notice how others feel, and your kindness makes people feel seen." },
-    { letter: "H", word: "Hopeful", meaning: "You bring a bright outlook that makes hard days seem gentler." },
-    { letter: "A", word: "Authentic", meaning: "You are genuine and comfortable being yourself." },
-    { letter: "R", word: "Resilient", meaning: "You keep finding strength and grace through life's challenges." },
-    { letter: "M", word: "Mindful", meaning: "You listen closely and remember the small things that matter." },
-    { letter: "A", word: "Admirable", meaning: "Your sincerity and good heart make you easy to respect." },
-    { letter: "I", word: "Inspiring", meaning: "The way you live encourages others to grow and do good." },
-    { letter: "N", word: "Nurturing", meaning: "You make people feel cared for, safe, and understood." },
-    { letter: "E", word: "Elegant", meaning: "Your grace shows in your words, choices, and quiet confidence." },
-  ];
-
-  const photos = [
-    {
-      src: "/photos/k4.jpg",
-      caption: "A kind of beauty that feels timeless.",
-    },
-    {
-      src: "/photos/k2.jpg",
-      caption: "That smile is honestly unforgettable.",
-    },
-    {
-      src: "/photos/k1.jpg",
-      caption: "Soft, pretty, and effortlessly charming.",
-    },
-  ];
-
-  const songs: Song[] = [
-    {
-      title: "The Most Beautiful Thing",
-      artist: "Bruno Major",
-      reason: "This reminds me of how naturally beautiful you are.",
-      spotifyLink: "https://open.spotify.com/track/07koEqsKHZTlGVMC9eoEjO",
-      embedLink:
-        "https://open.spotify.com/embed/track/07koEqsKHZTlGVMC9eoEjO?utm_source=generator",
-    },
-    {
-      title: "Nothing",
-      artist: "Bruno Major",
-      reason: "This reminds me that even simple moments can feel special.",
-      spotifyLink: "https://open.spotify.com/track/1lORkxEMmsCZqhoxcmk3A3",
-      embedLink:
-        "https://open.spotify.com/embed/track/1lORkxEMmsCZqhoxcmk3A3?utm_source=generator",
-    },
-    {
-      title: "Best Part",
-      artist: "Daniel Caesar ft. H.E.R.",
-      reason: "This reminds me of someone who makes an ordinary day better.",
-      spotifyLink: "https://open.spotify.com/track/1RMJOxR6GRPsBHL8qeC2ux",
-      embedLink:
-        "https://open.spotify.com/embed/track/1RMJOxR6GRPsBHL8qeC2ux?utm_source=generator",
-    },
-    {
-      title: "Those Eyes",
-      artist: "New West",
-      reason:
-        "This reminds me of the small details that make someone unforgettable.",
-      spotifyLink: "https://open.spotify.com/track/50x1Ic8CaXkYNvjmxe3WXy",
-      embedLink:
-        "https://open.spotify.com/embed/track/50x1Ic8CaXkYNvjmxe3WXy?utm_source=generator",
-    },
-    {
-      title: "Until I Found You",
-      artist: "Stephen Sanchez",
-      reason: "This has that soft, sweet, old-school romantic feeling.",
-      spotifyLink: "https://open.spotify.com/track/0T5iIrXA4p5GsubkhuBIKV",
-      embedLink:
-        "https://open.spotify.com/embed/track/0T5iIrXA4p5GsubkhuBIKV?utm_source=generator",
-    },
-    {
-      title: "Heaven Knows",
-      artist: "Orange & Lemons",
-      reason: "This feels soft, sincere, and heartfelt.",
-      spotifyLink: "https://open.spotify.com/track/0Qra8Ps4tJAZPqRXyehCjc",
-      embedLink:
-        "https://open.spotify.com/embed/track/0Qra8Ps4tJAZPqRXyehCjc?utm_source=generator",
-    },
-  ];
-
-  if (!showInvitation) {
-    return (
-      <main
-        className={`${inter.className} flex min-h-screen items-center justify-center bg-gradient-to-br from-rose-100 via-pink-100 to-red-100 px-6 text-center text-rose-950`}
-      >
-        <section className="w-full max-w-3xl rounded-[2rem] border border-white/70 bg-white/80 px-8 py-16 shadow-2xl backdrop-blur-md">
-          <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-rose-100 text-4xl shadow-inner">
-            💌
-          </div>
-
-          <p className="mb-4 text-sm font-bold uppercase tracking-[4px] text-rose-500">
-            A simple invitation
-          </p>
-
-          <h1
-            className={`${greatVibes.className} mx-auto mb-8 max-w-2xl text-6xl leading-tight text-rose-900 md:text-8xl`}
-          >
-            A little invitation for Charmaine
-          </h1>
-
-          <button
-            onClick={() => setShowInvitation(true)}
-            className="rounded-full bg-rose-600 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:scale-105 hover:bg-rose-700"
-          >
-            Open Invitation
-          </button>
-        </section>
-      </main>
-    );
-  }
+  const [noteIndex, setNoteIndex] = useState<number | null>(null);
 
   return (
-    <main
-      className={`${inter.className} min-h-screen bg-gradient-to-br from-rose-100 via-pink-100 to-red-100 text-rose-950`}
-    >
-      <section className="mx-auto max-w-7xl px-6 py-10">
-        <div className="rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-2xl backdrop-blur-md md:p-8">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr_1fr]">
-            <div className="rounded-[1.5rem] bg-rose-900 p-7 text-white shadow-xl">
-              <div className="mb-5 overflow-hidden rounded-[1.3rem] border border-white/20">
-                <Image
-                  src="/photos/k4.jpg"
-                  alt="A beautiful photo"
-                  width={700}
-                  height={900}
-                  className="h-52 w-full object-cover"
-                />
-              </div>
-
-              <p className="text-sm font-bold uppercase tracking-[3px] text-rose-200">
-                A little page made for you
-              </p>
-
-              <h1
-                className={`${greatVibes.className} mt-4 text-6xl leading-tight text-white md:text-8xl`}
-              >
-                For Charmaine
-              </h1>
-
-              <p className="mt-5 text-base leading-7 text-rose-100">
-                I made this because there are things about you that deserve to
-                be appreciated. This is just a small way of saying that your
-                presence, your heart, and your beauty are something special.
-              </p>
-
-              <div className="mt-7 flex flex-col gap-3">
-                <a
-                  href="#photos"
-                  className="rounded-full bg-white px-6 py-3 text-center font-semibold text-rose-900 transition hover:bg-rose-100"
-                >
-                  View Photos
-                </a>
-
-                <a
-                  href="#songs"
-                  className="rounded-full border border-white/40 px-6 py-3 text-center font-semibold text-white transition hover:bg-white/10"
-                >
-                  View Songs
-                </a>
-
-                <a
-                  href="#invitation"
-                  className="rounded-full border border-white/40 px-6 py-3 text-center font-semibold text-white transition hover:bg-white/10"
-                >
-                  Read Invitation
-                </a>
-              </div>
-            </div>
-
-            <div className="rounded-[1.5rem] bg-white p-6 shadow-lg">
-              <p className="mb-3 text-sm font-bold uppercase tracking-[3px] text-rose-500">
-                Her name in words
-              </p>
-
-              <h2
-                className={`${playfair.className} text-5xl font-extrabold tracking-[0.25em] text-rose-900 md:text-7xl`}
-              >
-                CHARMAINE
-              </h2>
-
-              <div className="mt-6 grid gap-3">
-                {nameCompliments.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex gap-4 rounded-2xl border border-rose-100 bg-rose-50 p-4"
-                  >
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-rose-600 text-xl font-extrabold text-white">
-                      {item.letter}
-                    </div>
-
-                    <div>
-                      <h3
-                        className={`${playfair.className} text-xl font-bold text-rose-900`}
-                      >
-                        {item.word}
-                      </h3>
-
-                      <p className="text-sm leading-6 text-rose-700">
-                        {item.meaning}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid gap-6">
-              <aside className="rounded-[1.5rem] border border-rose-200 bg-rose-50 p-6 shadow-lg">
-                <div className="mb-5 overflow-hidden rounded-[1.3rem] border border-rose-200">
-                  <Image
-                    src="/photos/k2.jpg"
-                    alt="A warm smiling photo"
-                    width={700}
-                    height={900}
-                    className="h-48 w-full object-cover"
-                  />
-                </div>
-
-                <p className="text-sm font-bold uppercase tracking-[3px] text-rose-500">
-                  A gentle reminder
-                </p>
-
-                <h3
-                  className={`${playfair.className} mt-4 text-3xl font-extrabold leading-tight text-rose-900`}
-                >
-                  No matter how much people hurt you, never let them lower your
-                  value.
-                </h3>
-
-                <p className="mt-4 text-base leading-7 text-rose-700">
-                  You are still worthy of love, respect, peace, and happiness.
-                  The way people treat you does not define how precious you are.
-                </p>
-              </aside>
-
-              <div className="rounded-[1.5rem] bg-rose-900 p-6 text-white shadow-lg">
-                <div className="mb-5 overflow-hidden rounded-[1.3rem] border border-white/20">
-                  <Image
-                    src="/photos/k1.jpg"
-                    alt="A soft charming photo"
-                    width={700}
-                    height={900}
-                    className="h-48 w-full object-cover"
-                  />
-                </div>
-
-                <p
-                  className={`${greatVibes.className} text-4xl leading-tight md:text-5xl`}
-                >
-                  “Love is patient and kind.”
-                </p>
-
-                <p className="mt-4 text-sm font-semibold text-rose-200">
-                  1 Corinthians 13:4
-                </p>
-              </div>
-            </div>
+    <main className={`${inter.className} min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-rose-100 text-rose-950`}>
+      <header className="px-5 pb-12 pt-12 sm:px-8 sm:pt-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 rounded-[2rem] border border-white/80 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-10 md:grid-cols-[1.1fr_0.9fr] md:p-14">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-rose-600 sm:text-sm">A letter for Charmaine</p>
+            <h1 className={`${greatVibes.className} mt-4 text-6xl leading-tight text-rose-900 sm:text-7xl md:text-8xl`}>Dear Charmaine</h1>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-rose-800 sm:text-xl">
+              I wanted to make something that says what I mean, simply and honestly.
+            </p>
+            <nav aria-label="Page sections" className="mt-8 flex flex-wrap gap-3">
+              <a href="#letter" className="rounded-full bg-rose-700 px-5 py-3 font-semibold text-white transition hover:bg-rose-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-900">Read the letter</a>
+              <a href="#songs" className="rounded-full border border-rose-300 bg-white px-5 py-3 font-semibold text-rose-800 transition hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-900">Play the playlist</a>
+            </nav>
           </div>
-
-          <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-[1.5rem] bg-white p-6 shadow-lg">
-              <h2
-                className={`${playfair.className} mb-5 text-4xl font-bold italic text-rose-900`}
-              >
-                What I Like About You
-              </h2>
-
-              <div className="grid gap-3">
-                {thingsILike.map((item, index) => (
-                  <div
-                    key={index}
-                    className="rounded-2xl border border-rose-100 bg-rose-50 p-4"
-                  >
-                    <p className="text-sm font-bold text-rose-500">
-                      0{index + 1}
-                    </p>
-
-                    <p className="mt-1 leading-7 text-rose-800">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[1.5rem] bg-white p-6 shadow-lg">
-              <h2
-                className={`${playfair.className} mb-5 text-4xl font-bold italic text-rose-900`}
-              >
-                What I Admire About You
-              </h2>
-
-              <div className="grid gap-3">
-                {thingsIAdmire.map((item, index) => (
-                  <div
-                    key={index}
-                    className="rounded-2xl border border-rose-100 bg-white p-4 shadow-sm"
-                  >
-                    <p className="text-sm font-bold text-rose-500">
-                      0{index + 1}
-                    </p>
-
-                    <p className="mt-1 leading-7 text-rose-800">
-                      I admire {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-[1.6rem] shadow-lg">
+            <Image src="/photos/k4.jpg" alt="Charmaine by the seaside at sunset" width={700} height={900} priority className="max-h-[28rem] w-full object-cover" />
           </div>
+        </div>
+      </header>
 
-          <section
-            id="photos"
-            className="mt-6 rounded-[1.5rem] bg-white p-6 shadow-lg"
+      <section id="letter" className="scroll-mt-8 px-5 py-6 sm:px-8">
+        <article className="mx-auto max-w-4xl rounded-[2rem] border border-rose-100 bg-white p-7 shadow-lg sm:p-10 md:p-14">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-rose-600 sm:text-sm">What I wanted to tell you</p>
+          <h2 className={`${playfair.className} mt-3 text-3xl font-bold text-rose-950 sm:text-4xl`}>I’m interested in who you are.</h2>
+          <div className="mt-7 space-y-5 text-base leading-8 text-slate-700 sm:text-lg sm:leading-9">
+            <p>Charmaine, I want to be honest about why I’m reaching out. I do find you attractive, but I don’t want that to be the center of this or the only thing I notice about you.</p>
+            <p>I’m drawn to your substance: your character, your values, your ideas, and the way you see the world. I’d like to learn what matters to you, hear what you’re curious about, and understand the person you are becoming. Your mind and mindset are what I hope to know better.</p>
+            <p>I’m not writing to pressure you or to expect anything in return. I’d just like the chance to get to know you with sincerity and respect, at a pace that feels comfortable for you. If you don’t feel the same, I’ll respect that too.</p>
+            <p className="pt-2 font-semibold text-rose-900">With respect,<br />Someone who would like to know you better</p>
+          </div>
+        </article>
+      </section>
+
+      <section className="px-5 py-12 sm:px-8">
+        <div className="mx-auto max-w-4xl rounded-[2rem] bg-rose-900 p-7 text-white shadow-xl sm:p-10">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-rose-200 sm:text-sm">A little surprise</p>
+          <h2 className={`${playfair.className} mt-3 text-3xl font-bold sm:text-4xl`}>A note, whenever you need one.</h2>
+          <p className="mt-3 max-w-2xl leading-7 text-rose-100">Tap below to uncover a small reminder. There are a few, so you can come back for another.</p>
+          <button
+            type="button"
+            onClick={() => setNoteIndex((current) => current === null ? 0 : (current + 1) % notes.length)}
+            aria-expanded={noteIndex !== null}
+            aria-controls="surprise-note"
+            className="mt-6 rounded-full bg-white px-6 py-3 font-bold text-rose-900 transition hover:-translate-y-0.5 hover:bg-rose-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            <p className="mb-3 text-sm font-bold uppercase tracking-[3px] text-rose-500">
-              Little moments of you
-            </p>
-
-            <h2
-              className={`${playfair.className} text-4xl font-bold italic text-rose-900 md:text-5xl`}
-            >
-              Photos That Make This Page Feel More Like You
-            </h2>
-
-            <p className="mt-4 max-w-3xl text-base leading-7 text-rose-700">
-              I added these because words are sweet, but seeing you makes this
-              page feel more personal.
-            </p>
-
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {photos.map((photo, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-[2rem] border border-rose-200 bg-rose-50 p-4 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <Image
-                    src={photo.src}
-                    alt={`Charmaine photo ${index + 1}`}
-                    width={700}
-                    height={900}
-                    className="h-[420px] w-full rounded-[1.5rem] object-cover"
-                  />
-
-                  <p className="mt-5 text-center text-base font-medium leading-7 text-rose-800">
-                    {photo.caption}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
+            {noteIndex === null ? "Open a little note" : "Reveal another note"}
+          </button>
+          {noteIndex !== null && <p id="surprise-note" aria-live="polite" className="mt-6 rounded-2xl border border-white/20 bg-white/10 p-5 text-lg leading-8 text-white">{notes[noteIndex]}</p>}
         </div>
       </section>
 
-      <section id="songs" className="mx-auto max-w-7xl px-6 py-16">
-        <div className="rounded-[2rem] bg-white/80 p-8 shadow-xl backdrop-blur md:p-12">
-          <p className="mb-4 text-center text-sm font-bold uppercase tracking-[3px] text-rose-500">
-            A small playlist
-          </p>
-
-          <h2
-            className={`${playfair.className} text-center text-5xl font-extrabold italic text-rose-900 md:text-6xl`}
-          >
-            Songs That Remind Me of You
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-3xl text-center text-lg leading-8 text-rose-700">
-            These songs carry the kind of softness, beauty, and sincerity that
-            reminds me of you.
-          </p>
-
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            {songs.map((song, index) => (
-              <div
-                key={index}
-                className="overflow-hidden rounded-[2rem] border border-rose-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
-              >
-                <iframe
-                  title={`${song.title} by ${song.artist}`}
-                  src={song.embedLink}
-                  width="100%"
-                  height="352"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                  className="rounded-3xl"
-                />
-
-                <div className="px-2 pb-2 pt-6">
-                  <p className="text-sm font-bold uppercase tracking-[2px] text-rose-500">
-                    Song 0{index + 1}
-                  </p>
-
-                  <h3
-                    className={`${playfair.className} mt-2 text-3xl font-bold text-rose-900`}
-                  >
-                    {song.title}
-                  </h3>
-
-                  <p className="mt-1 font-semibold text-rose-600">
-                    {song.artist}
-                  </p>
-
-                  <p className="mt-4 text-lg leading-8 text-rose-800">
-                    {song.reason}
-                  </p>
-
-                  <a
-                    href={song.spotifyLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-block rounded-full bg-green-500 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-green-600"
-                  >
-                    Open on Spotify
-                  </a>
-                </div>
+      <section className="px-5 py-10 sm:px-8">
+        <div className="mx-auto max-w-4xl rounded-[2rem] border border-rose-100 bg-white p-7 shadow-lg sm:p-10">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-rose-600 sm:text-sm">CHARMAINE</p>
+          <h2 className={`${playfair.className} mt-2 text-3xl font-bold text-rose-950 sm:text-4xl`}>Nine qualities I appreciate</h2>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {qualities.map(([letter, word, meaning], index) => (
+              <div key={index} className="flex gap-4 rounded-2xl border border-rose-100 bg-rose-50 p-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-rose-700 text-xl font-extrabold text-white">{letter}</span>
+                <div><h3 className="font-bold text-rose-950">{word}</h3><p className="mt-1 text-sm leading-6 text-rose-800">{meaning}</p></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="invitation" className="mx-auto max-w-4xl px-6 py-20">
-        <div className="rounded-[2rem] bg-white p-10 text-center shadow-xl md:p-14">
-          <p className="mb-4 text-sm font-bold uppercase tracking-[3px] text-rose-500">
-            My simple invitation
-          </p>
-
-          <h2
-            className={`${playfair.className} text-5xl font-extrabold italic text-rose-900 md:text-6xl`}
-          >
-            Church and Coffee?
-          </h2>
-
-          <p className="mt-6 text-lg leading-8 text-rose-800">
-            I would love to invite you to go to church with me. After that,
-            maybe we can have coffee together and spend a peaceful day.
-          </p>
-
-          <p className="mt-5 text-lg leading-8 text-rose-800">
-            Nothing too fancy. Just a simple day with God, good coffee, and your
-            beautiful presence.
-          </p>
-
-          <p className="mt-8 text-2xl font-bold text-rose-900">
-            Would you like to go with me?
-          </p>
-
-          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-            <a
-              href="mailto:your-email@gmail.com?subject=Church and Coffee&body=Yes, I would love to go with you."
-              className="rounded-full bg-rose-600 px-8 py-4 font-semibold text-white shadow-md transition hover:bg-rose-700"
-            >
-              Yes, I would love to
-            </a>
-
-            <button
-              onClick={() => setShowInvitation(false)}
-              className="rounded-full border border-rose-300 px-8 py-4 font-semibold text-rose-700 transition hover:bg-rose-50"
-            >
-              Back to Main Page
-            </button>
+      <section className="px-5 py-10 sm:px-8">
+        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-[0.8fr_1.2fr]">
+          <div className="rounded-[2rem] bg-rose-800 p-7 text-white shadow-lg sm:p-9">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-rose-200">A line to keep</p>
+            <p className={`${greatVibes.className} mt-5 text-5xl leading-tight sm:text-6xl`}>“Love is patient and kind.”</p>
+            <p className="mt-4 font-semibold text-rose-200">1 Corinthians 13:4</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {photos.map((photo, index) => <figure key={photo.src} className={`overflow-hidden rounded-2xl bg-white p-2 shadow-md ${index === 0 ? "col-span-2" : ""}`}>
+              <Image src={photo.src} alt={photo.caption} width={700} height={900} className={`${index === 0 ? "h-64 sm:h-80" : "h-52 sm:h-64"} w-full rounded-xl object-cover`} />
+              <figcaption className="px-2 py-3 text-sm text-rose-800">{photo.caption}</figcaption>
+            </figure>)}
           </div>
         </div>
       </section>
+
+      <section id="songs" className="scroll-mt-8 px-5 py-12 sm:px-8">
+        <div className="mx-auto max-w-4xl rounded-[2rem] bg-white p-7 shadow-xl sm:p-10">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-rose-600 sm:text-sm">A playlist for a softer moment</p>
+          <h2 className={`${playfair.className} mt-3 text-center text-3xl font-bold text-rose-950 sm:text-4xl`}>Songs I thought you might like</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center leading-7 text-rose-800">A few sweet songs chosen for their warmth and sincerity.</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {songs.map((song) => <article key={song.id} className="overflow-hidden rounded-2xl border border-rose-100 bg-rose-50 p-4">
+              <iframe title={`${song.title} by ${song.artist}`} src={`https://open.spotify.com/embed/track/${song.id}?utm_source=generator`} width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-xl" />
+              <h3 className={`${playfair.className} mt-4 text-xl font-bold text-rose-950`}>{song.title}</h3>
+              <p className="mt-1 text-sm font-semibold text-rose-700">{song.artist}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{song.reason}</p>
+            </article>)}
+          </div>
+        </div>
+      </section>
+
+      <footer className="px-5 pb-10 pt-4 text-center text-sm text-rose-700">Made with care for Charmaine.</footer>
     </main>
   );
 }
